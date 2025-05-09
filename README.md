@@ -75,34 +75,15 @@ Editar cita
 PUT /api/appointments/{idCita}
 
 Cuerpo de la solicitud:
-
-json
-Copiar
-Editar
+```json
 {
-"doctorId": 1,
-"consultorioId": 1,
-"fechaHora": "2025-05-10T10:00:00",
-"nombrePaciente": "Juan Perez"
+   "doctorId": 1,
+   "consultorioId": 1,
+   "fechaHora": "2025-05-10T10:00:00",
+  "nombrePaciente": "Juan Perez"
 }
-Estructura del Proyecto
-plaintext
-Copiar
-Editar
-.
-├── src
-│ ├── main
-│ │ ├── java
-│ │ │ ├── com
-│ │ │ │ ├── hospital
-│ │ │ │ │ ├── controller
-│ │ │ │ │ ├── dto
-│ │ │ │ │ ├── exception
-│ │ │ │ │ ├── model
-│ │ │ │ │ └── service
-│ │ └── resources
-│ │ └── application.properties
-└── pom.xml
+```
+
 Base de Datos
 Este proyecto utiliza H2 como base de datos en memoria. Se puede consultar y modificar directamente desde la consola web
 de H2 en http://localhost:8080/h2-console.
@@ -110,11 +91,9 @@ de H2 en http://localhost:8080/h2-console.
 Configuración de H2 en application.properties:
 
 properties
-Copiar
-Editar
-spring.datasource.url=jdbc:h2:mem:testdb
+spring.datasource.url=jdbc:h2:mem:hospitaldb
 spring.datasource.driverClassName=org.h2.Driver
 spring.datasource.username=sa
-spring.datasource.password=password
+spring.datasource.password=
 spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
 spring.h2.console.enabled=true

@@ -1,6 +1,7 @@
 package com.dev.projects.pruebakosmos.controllers;
 
 import com.dev.projects.pruebakosmos.dto.requests.AppointmentRequestDTO;
+import com.dev.projects.pruebakosmos.dto.requests.UpdateAppointmentDTO;
 import com.dev.projects.pruebakosmos.dto.responses.ResponseGeneric;
 import com.dev.projects.pruebakosmos.entities.Appointment;
 import com.dev.projects.pruebakosmos.services.AppointmentsService;
@@ -58,8 +59,9 @@ public class AppointmentController {
     }
 
     @PutMapping("/{idCita}")
-    public ResponseEntity<ResponseGeneric> actualizarCita(@PathVariable Long idCita) {
-        ResponseGeneric response = appointmentsService.actualizarCita(idCita);
+    public ResponseEntity<ResponseGeneric> actualizarCita(@PathVariable Long idCita,
+                                                          @RequestBody @Valid UpdateAppointmentDTO updateAppointmentDTO) {
+        ResponseGeneric response = appointmentsService.actualizarCita(idCita, updateAppointmentDTO);
 
         response.setStatusCode(200);
         response.setMessageCode("Cita actualizada con éxito");

@@ -1,0 +1,388 @@
+{
+	"info": {
+		"_postman_id": "5e088780-16fe-4cae-a509-52146f57532d",
+		"name": "Hospital Citas App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11593092"
+	},
+	"item": [
+		{
+			"name": "Crear Cita",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"idDoctor\": 1,\n  \"idOffice\": 1,\n  \"fechaHora\": \"2025-05-11T17:00:00\",\n  \"nombrePaciente\": \"Juan Perez 8\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/appointments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"appointments"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "201 OK",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"idDoctor\": 1,\n  \"idOffice\": 1,\n  \"fechaHora\": \"2025-05-11T10:00:00\",\n  \"nombrePaciente\": \"Juan Perez\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/appointments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"appointments"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 09 May 2025 22:31:32 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 201,\n    \"messageCode\": \"Operación realizada con éxito\",\n    \"data\": {\n        \"id\": 2,\n        \"doctor\": {\n            \"id\": 1,\n            \"name\": \"Luis\",\n            \"paternal\": \"Ramos\",\n            \"maternal\": \"Fernandez\",\n            \"especiality\": \"Medicina Interna\"\n        },\n        \"consultorio\": {\n            \"id\": 1,\n            \"number\": 1,\n            \"floor\": 101\n        },\n        \"fechaHora\": \"2025-05-11T10:00:00\",\n        \"nombrePaciente\": \"Juan Perez\",\n        \"estado\": \"PENDIENTE\"\n    }\n}"
+				},
+				{
+					"name": "400 - No se puede agendar cita para un paciente a la una misma hora ni con menos de 2 horas",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"idDoctor\": 1,\n  \"idOffice\": 1,\n  \"fechaHora\": \"2025-05-11T10:00:00\",\n  \"nombrePaciente\": \"Juan Perez\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/appointments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"appointments"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 09 May 2025 22:32:31 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Ya hay una cita en este consultorio a esa hora.\"\n}"
+				},
+				{
+					"name": "Un mismo doctor no puede tener más de 8 citas en el día.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"idDoctor\": 1,\n  \"idOffice\": 1,\n  \"fechaHora\": \"2025-05-11T17:00:00\",\n  \"nombrePaciente\": \"Juan Perez 8\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/appointments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"appointments"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 09 May 2025 22:34:55 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"El doctor ya tiene 8 citas para este día.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Consultar Citas por Doctor y Fecha",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/appointments/doctor/1?fecha=2025-05-11",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"appointments",
+						"doctor",
+						"1"
+					],
+					"query": [
+						{
+							"key": "fecha",
+							"value": "2025-05-11"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Consultar Citas por Doctor y Fecha",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/appointments/doctor/1?fecha=2025-05-11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"appointments",
+								"doctor",
+								"1"
+							],
+							"query": [
+								{
+									"key": "fecha",
+									"value": "2025-05-11"
+								}
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 09 May 2025 22:44:11 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 201,\n    \"messageCode\": \"Operación realizada con éxito\",\n    \"data\": [\n        {\n            \"id\": 2,\n            \"doctor\": {\n                \"id\": 1,\n                \"name\": \"Luis\",\n                \"paternal\": \"Ramos\",\n                \"maternal\": \"Fernandez\",\n                \"especiality\": \"Medicina Interna\"\n            },\n            \"consultorio\": {\n                \"id\": 1,\n                \"number\": 1,\n                \"floor\": 101\n            },\n            \"fechaHora\": \"2025-05-11T10:00:00\",\n            \"nombrePaciente\": \"Juan Perez\",\n            \"estado\": \"PENDIENTE\"\n        },\n        {\n            \"id\": 3,\n            \"doctor\": {\n                \"id\": 1,\n                \"name\": \"Luis\",\n                \"paternal\": \"Ramos\",\n                \"maternal\": \"Fernandez\",\n                \"especiality\": \"Medicina Interna\"\n            },\n            \"consultorio\": {\n                \"id\": 1,\n                \"number\": 1,\n                \"floor\": 101\n            },\n            \"fechaHora\": \"2025-05-11T09:00:00\",\n            \"nombrePaciente\": \"Juan Perez 1\",\n            \"estado\": \"PENDIENTE\"\n        },\n        {\n            \"id\": 4,\n            \"doctor\": {\n                \"id\": 1,\n                \"name\": \"Luis\",\n                \"paternal\": \"Ramos\",\n                \"maternal\": \"Fernandez\",\n                \"especiality\": \"Medicina Interna\"\n            },\n            \"consultorio\": {\n                \"id\": 1,\n                \"number\": 1,\n                \"floor\": 101\n            },\n            \"fechaHora\": \"2025-05-11T11:00:00\",\n            \"nombrePaciente\": \"Juan Perez 2\",\n            \"estado\": \"PENDIENTE\"\n        },\n        {\n            \"id\": 5,\n            \"doctor\": {\n                \"id\": 1,\n                \"name\": \"Luis\",\n                \"paternal\": \"Ramos\",\n                \"maternal\": \"Fernandez\",\n                \"especiality\": \"Medicina Interna\"\n            },\n            \"consultorio\": {\n                \"id\": 1,\n                \"number\": 1,\n                \"floor\": 101\n            },\n            \"fechaHora\": \"2025-05-11T12:00:00\",\n            \"nombrePaciente\": \"Juan Perez 3\",\n            \"estado\": \"PENDIENTE\"\n        },\n        {\n            \"id\": 6,\n            \"doctor\": {\n                \"id\": 1,\n                \"name\": \"Luis\",\n                \"paternal\": \"Ramos\",\n                \"maternal\": \"Fernandez\",\n                \"especiality\": \"Medicina Interna\"\n            },\n            \"consultorio\": {\n                \"id\": 1,\n                \"number\": 1,\n                \"floor\": 101\n            },\n            \"fechaHora\": \"2025-05-11T13:00:00\",\n            \"nombrePaciente\": \"Juan Perez 4\",\n            \"estado\": \"PENDIENTE\"\n        },\n        {\n            \"id\": 7,\n            \"doctor\": {\n                \"id\": 1,\n                \"name\": \"Luis\",\n                \"paternal\": \"Ramos\",\n                \"maternal\": \"Fernandez\",\n                \"especiality\": \"Medicina Interna\"\n            },\n            \"consultorio\": {\n                \"id\": 1,\n                \"number\": 1,\n                \"floor\": 101\n            },\n            \"fechaHora\": \"2025-05-11T14:00:00\",\n            \"nombrePaciente\": \"Juan Perez 5\",\n            \"estado\": \"PENDIENTE\"\n        },\n        {\n            \"id\": 8,\n            \"doctor\": {\n                \"id\": 1,\n                \"name\": \"Luis\",\n                \"paternal\": \"Ramos\",\n                \"maternal\": \"Fernandez\",\n                \"especiality\": \"Medicina Interna\"\n            },\n            \"consultorio\": {\n                \"id\": 1,\n                \"number\": 1,\n                \"floor\": 101\n            },\n            \"fechaHora\": \"2025-05-11T15:00:00\",\n            \"nombrePaciente\": \"Juan Perez 6\",\n            \"estado\": \"PENDIENTE\"\n        },\n        {\n            \"id\": 9,\n            \"doctor\": {\n                \"id\": 1,\n                \"name\": \"Luis\",\n                \"paternal\": \"Ramos\",\n                \"maternal\": \"Fernandez\",\n                \"especiality\": \"Medicina Interna\"\n            },\n            \"consultorio\": {\n                \"id\": 1,\n                \"number\": 1,\n                \"floor\": 101\n            },\n            \"fechaHora\": \"2025-05-11T16:00:00\",\n            \"nombrePaciente\": \"Juan Perez 7\",\n            \"estado\": \"PENDIENTE\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Cancelar Cita",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/appointments/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"appointments",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 OK",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/appointments/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"appointments",
+								"1"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 09 May 2025 22:45:31 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 201,\n    \"messageCode\": \"Operación realizada con éxito\",\n    \"data\": {\n        \"id\": 1,\n        \"doctor\": {\n            \"id\": 1,\n            \"name\": \"Luis\",\n            \"paternal\": \"Ramos\",\n            \"maternal\": \"Fernandez\",\n            \"especiality\": \"Medicina Interna\"\n        },\n        \"consultorio\": {\n            \"id\": 1,\n            \"number\": 1,\n            \"floor\": 101\n        },\n        \"fechaHora\": \"2025-05-10T10:00:00\",\n        \"nombrePaciente\": \"Juan Perez\",\n        \"estado\": \"CANCELADA\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "ACtualizar cita",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"idDoctor\": 1,\n  \"idOffice\": 1,\n  \"fechaHora\": \"2025-05-20T17:00:00\",\n  \"nombrePaciente\": \"Juan Perez 2312\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/appointments/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"appointments",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
